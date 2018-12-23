@@ -9,7 +9,8 @@ MODULES=\
 	enable_generator \
 	disp \
 	regfile \
-	datapath
+	datapath \
+	addi
 TESTS=\
 	flopr \
 	flopr_en \
