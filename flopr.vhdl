@@ -13,10 +13,12 @@ end entity;
 architecture behavior of flopr is
 begin
   process(clk, rst) begin
-    if rst='1' then
-      o_y <= (others => '0');
-    elsif rising_edge(clk) then
-      o_y <= i_a;
+    if rising_edge(clk) then
+      if rst = '1' then
+        o_y <= (others => '0');
+      else
+        o_y <= i_a;
+      end if;
     end if;
   end process;
 end architecture;

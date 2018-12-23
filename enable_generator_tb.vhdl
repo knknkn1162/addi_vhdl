@@ -35,7 +35,7 @@ begin
   stim_proc : process
   begin
     wait for CLK_PERIOD;
-    rst <= '1'; wait for 1 ns; rst <= '0';
+    rst <= '1'; wait until rising_edge(clk); wait for 1 ns; rst <= '0';
     assert s_ena = '0'; -- 0
     wait until rising_edge(clk); wait for 1 ns;
     assert s_ena = '0'; -- 1
