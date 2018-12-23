@@ -3,12 +3,15 @@ WORKDIR=.
 FLAGS=--warn-error --workdir=${WORKDIR}/
 #TB_OPTION=--assert-level=error
 MODULES=\
+	flopr \
+	flopr_en \
 	decoder \
 	enable_generator \
-	flopr_en \
+	disp
 TESTS=\
-	enable_generator \
+	flopr \
 	flopr_en \
+	enable_generator
 OBJS=$(addsuffix .o, ${MODULES})
 TESTBENCHES=$(addsuffix _tb, ${TESTS})
 

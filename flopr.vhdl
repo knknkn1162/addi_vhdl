@@ -7,7 +7,7 @@ entity flopr is
     clk, rst: in std_logic;
     i_a : in std_logic_vector(N-1 downto 0);
     o_y : out std_logic_vector(N-1 downto 0)
-       );
+  );
 end entity;
 
 architecture behavior of flopr is
