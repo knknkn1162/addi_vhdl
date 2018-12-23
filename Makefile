@@ -7,11 +7,13 @@ MODULES=\
 	flopr_en \
 	decoder \
 	enable_generator \
-	disp
+	disp \
+	regfile \
 TESTS=\
 	flopr \
 	flopr_en \
-	enable_generator
+	enable_generator \
+	regfile
 OBJS=$(addsuffix .o, ${MODULES})
 TESTBENCHES=$(addsuffix _tb, ${TESTS})
 
