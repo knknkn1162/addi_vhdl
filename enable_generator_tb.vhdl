@@ -40,21 +40,21 @@ begin
     wait until rising_edge(clk); wait for 1 ns;
     assert s_ena = '0'; -- 1
     wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '0'; -- 2
-    wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '0'; -- 3
-    wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '0'; -- 4
-    wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '0'; -- 5
-    wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '0'; -- 6
-    wait until rising_edge(clk); wait for 1 ns;
-    assert s_ena = '1'; -- 7
+    assert s_ena = '1'; -- 2
     wait until rising_edge(clk); wait for 1 ns;
     assert s_ena = '0'; -- 0
     wait until rising_edge(clk); wait for 1 ns;
     assert s_ena = '0'; -- 1
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_ena = '1'; -- 2
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_ena = '0'; -- 0
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_ena = '0'; -- 1
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_ena = '1'; -- 2
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_ena = '0'; -- 0
     -- skip
     s_stop <= TRUE;
     -- success message

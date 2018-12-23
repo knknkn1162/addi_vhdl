@@ -20,16 +20,18 @@ architecture behavior of enable_generator is
   );
 
   end component;
-  signal s_anxt, s_a: std_logic_vector(N-1 downto 0);
-  signal CONST_ONES : std_logic_vector(N-1 downto 0) := (others => '1');
+  constant MAX : natural := 26;
+  constant CONST_N_VEC : std_logic_vector(MAX-1 downto 0) := std_logic_vector(to_unsigned(N-1, MAX));
+  constant ZERO : std_logic_vector(MAX-1 downto 0) := (others => '0');
+  signal s_anxt, s_a : std_logic_vector(MAX-1 downto 0);
 
 begin
-  flopr0 : flopr generic map(N=>N)
+  flopr0 : flopr generic map(N=>MAX)
   port map (
     clk => clk, rst => rst,
     i_a => s_anxt,
     o_y => s_a
   );
-  o_ena <= '1' when s_a = CONST_ONES else '0';
-  s_anxt <= std_logic_vector(unsigned(s_a) + 1);
+  o_ena <= '1' when s_a = CONST_N_VEC else '0';
+  s_anxt <= ZERO when s_a = CONST_N_VEC else std_logic_vector(unsigned(s_a) + 1);
 end architecture;
