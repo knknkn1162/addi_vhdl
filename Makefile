@@ -9,11 +9,13 @@ MODULES=\
 	enable_generator \
 	disp \
 	regfile \
+	datapath
 TESTS=\
 	flopr \
 	flopr_en \
 	enable_generator \
-	regfile
+	regfile \
+	datapath
 OBJS=$(addsuffix .o, ${MODULES})
 TESTBENCHES=$(addsuffix _tb, ${TESTS})
 

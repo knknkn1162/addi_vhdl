@@ -29,13 +29,17 @@ architecture behavior of regfile is
   -- will create a memory initialization file (.mif) based on the 
   -- default value.
   signal s_ram : ram_type(0 to 2**ADDR_WIDTH-1) := init_ram;
-  signal CONST_ZERO : std_logic_vector(ADDR_WIDTH-1 downto 0) := "00000";
+  signal CONST_ZERO : std_logic_vector(ADDR_WIDTH-1 downto 0) := (others => '0');
 begin
-  process(clk)
+  process(clk, i_we, i_wa, i_wd)
+    variable idx : natural range 0 to 2**ADDR_WIDTH-1 := 0;
   begin
     if rising_edge(clk) then
-      if i_we = '1' and i_wa /= CONST_ZERO then
-        s_ram(to_integer(unsigned(i_wa))) <= i_wd;
+      if i_we = '1' then
+        idx := to_integer(unsigned(i_wa));
+        if idx /= 0 then
+          s_ram(idx) <= i_wd;
+        end if;
       end if;
     end if;
   end process;
