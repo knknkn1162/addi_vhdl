@@ -41,11 +41,14 @@ begin
 
   stim_proc : process
   begin
-    rst <= '1'; wait for 1 ns; rst <= '0';
+    rst <= '1'; wait until rising_edge(clk); wait for 1 ns; rst <= '0';
     wait for 1 ns; assert s_y = X"00000000";
-    s_a <= X"00000001"; wait for CLK_PERIOD/2; assert s_y = X"00000001";
-    s_a <= X"00000002"; wait for CLK_PERIOD/2; assert s_y = X"00000001";
-    wait for CLK_PERIOD/2; assert s_y = X"00000002";
+    s_a <= X"00000001";
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_y = X"00000001";
+    s_a <= X"00000002";
+    wait until rising_edge(clk); wait for 1 ns;
+    assert s_y = X"00000002";
     s_stop <= TRUE;
     -- success message
     assert false report "end of test" severity note;
