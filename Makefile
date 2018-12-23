@@ -23,7 +23,7 @@ clean:
 open:
 	open out.vcd
 
-%_tb: %_tb.o
+%_tb: %_tb.o %.o
 	$(GHDLC) -e $(FLAGS) $@
 	$(GHDLC) -r ${FLAGS} $@ --vcd=${WORKDIR}/out_$@.vcd ${TB_OPTION}
 
