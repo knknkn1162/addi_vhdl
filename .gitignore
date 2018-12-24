@@ -8,3 +8,4 @@ addi.qsf
 *.vcd
 work-obj93.cf
 !*/*
+!src

@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity datapath is
   generic(RAM_ADDR_WIDTH: natural);
   port (
-    clk, rst : in std_logic;
+    clk, rst, i_en : in std_logic;
     -- scan
     o_wa : out std_logic_vector(RAM_ADDR_WIDTH-1 downto 0);
     o_wd : out std_logic_vector(31 downto 0)
@@ -13,10 +13,11 @@ entity datapath is
 end entity;
 
 architecture behavior of datapath is
-  component flopr
+  component flopr_en
     generic(N : natural);
     port (
-      clk, rst: in std_logic;
+      clk, rst : in std_logic;
+      i_en: in std_logic;
       i_a : in std_logic_vector(N-1 downto 0);
       o_y : out std_logic_vector(N-1 downto 0)
     );
@@ -41,9 +42,9 @@ begin
   -- scan
   o_wa <= s_wa; o_wd <= s_wd;
 
-  flopr_addr : flopr generic map(N=>RAM_ADDR_WIDTH)
+  flopr_addr : flopr_en generic map(N=>RAM_ADDR_WIDTH)
   port map (
-    clk => clk, rst => rst,
+    clk => clk, rst => rst, i_en => i_en,
     i_a => s_addr_next,
     o_y => s_addr0
   );

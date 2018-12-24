@@ -2,6 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity addi is
+  generic(N : natural := 50000000);
   port (
     clk, rst : in std_logic;
     o_hex0 : out std_logic_vector(6 downto 0);
@@ -14,6 +15,14 @@ entity addi is
 end entity;
 
 architecture behavior of addi is
+  component enable_generator
+    generic(N : natural);
+    port (
+      clk, rst : in std_logic;
+      o_ena : out std_logic
+    );
+  end component;
+
   component datapath
     generic(RAM_ADDR_WIDTH: natural);
     port (
@@ -36,11 +45,19 @@ architecture behavior of addi is
     );
   end component;
 
+
   constant RAM_ADDR_WIDTH : natural := 4;
+  signal s_ena : std_logic;
   signal s_num : std_logic_vector(23 downto 0);
   signal s_wd : std_logic_vector(31 downto 0);
 
 begin
+  enable_generator0 : enable_generator generic map (N=>N)
+  port map (
+    clk => clk, rst => rst,
+    o_ena => s_ena
+  );
+
   datapath0 : datapath generic map(RAM_ADDR_WIDTH=>RAM_ADDR_WIDTH)
   port map (
     clk => clk, rst => rst,
