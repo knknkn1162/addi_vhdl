@@ -46,7 +46,8 @@ architecture behavior of addi is
   end component;
 
 
-  constant RAM_ADDR_WIDTH : natural := 4;
+  constant RAM_ADDR_WIDTH : natural := 5;
+  signal s_wa : std_logic_vector(RAM_ADDR_WIDTH-1 downto 0);
   signal s_ena : std_logic;
   signal s_num : std_logic_vector(23 downto 0);
   signal s_wd : std_logic_vector(31 downto 0);
@@ -61,10 +62,12 @@ begin
   datapath0 : datapath generic map(RAM_ADDR_WIDTH=>RAM_ADDR_WIDTH)
   port map (
     clk => clk, rst => rst, i_en => s_ena,
-    o_wa => s_num(23 downto 20), o_wd => s_wd
+    o_wa => s_wa, o_wd => s_wd
   );
 
-  s_num(19 downto 0) <= s_wd(19 downto 0);
+  -- Output pins are stuck at VCC or GND
+  s_num(23 downto 16) <= "000" & s_wa;
+  s_num(15 downto 0) <= s_wd(15 downto 0);
 
   disp0 : disp port map (
     i_num => s_num,
