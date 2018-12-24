@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity addi is
-  generic(N : natural := 50000000);
+  generic(N : natural);
   port (
     clk, rst : in std_logic;
     o_hex0 : out std_logic_vector(6 downto 0);
