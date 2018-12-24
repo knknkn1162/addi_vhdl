@@ -26,7 +26,7 @@ architecture behavior of addi is
   component datapath
     generic(RAM_ADDR_WIDTH: natural);
     port (
-      clk, rst : in std_logic;
+      clk, rst, i_en : in std_logic;
       -- scan
       o_wa : out std_logic_vector(RAM_ADDR_WIDTH-1 downto 0);
       o_wd : out std_logic_vector(31 downto 0)
@@ -60,7 +60,7 @@ begin
 
   datapath0 : datapath generic map(RAM_ADDR_WIDTH=>RAM_ADDR_WIDTH)
   port map (
-    clk => clk, rst => rst,
+    clk => clk, rst => rst, i_en => s_ena,
     o_wa => s_num(23 downto 20), o_wd => s_wd
   );
 

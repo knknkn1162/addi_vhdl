@@ -53,7 +53,7 @@ begin
 
   regfile0 : regfile generic map(ADDR_WIDTH=>RAM_ADDR_WIDTH)
   port map (
-    clk => clk, i_we => '1',
+    clk => clk, i_we => i_en,
     i_ra => s_addr0,
     i_wa => s_wa,
     i_wd => s_wd,
